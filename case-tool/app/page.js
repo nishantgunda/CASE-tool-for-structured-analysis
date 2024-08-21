@@ -1,7 +1,25 @@
-import Image from "next/image";
+'use client';
+
+import { useState } from 'react';
+import { Button } from 'flowbite-react';
+import Sidebar from './components/sidebar.jsx';
 
 export default function Home() {
-  return ( 
-    <div>hi</div>
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(prevState => !prevState);
+  };
+
+  return (
+    <div>
+      
+      {isSidebarOpen && (
+        <Sidebar SidebarStatus={isSidebarOpen} />
+      )}
+      <Button onClick={toggleSidebar} className="bg-amber-400">
+        {isSidebarOpen ? 'CLOSE SIDEBAR' : 'OPEN SIDEBAR'}
+      </Button>
+    </div>
   );
 }
