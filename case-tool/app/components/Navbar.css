@@ -1,0 +1,44 @@
+.trigger-area {
+  height: 20px; /* Adjust height as needed */
+  background: transparent; /* Invisible area */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9;
+}
+
+.navbar {
+  background-color: #333;
+  padding: 10px;
+  color: white;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  top: 0; /* Pushes it down a bit so it doesn't overlap with the trigger area */
+  width: 100%;
+  z-index: 10;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.navbar li {
+  cursor: pointer;
+}
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
