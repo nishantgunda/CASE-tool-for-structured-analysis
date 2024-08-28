@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Button } from 'flowbite-react';
 import Sidebar from './components/sidebar.jsx';
-
+import Navbar from "./components/Navbar";
 export default function Home() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <div>
-      
+      <Navbar/>
       {isSidebarOpen && (
         <Sidebar SidebarStatus={isSidebarOpen} />
       )}
