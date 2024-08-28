@@ -1,9 +1,10 @@
 'use client';
-
 import { useState } from 'react';
 import { Button } from 'flowbite-react';
 import Sidebar from './components/sidebar.jsx';
 import Navbar from "./components/Navbar";
+import { FaBars, FaTimes } from 'react-icons/fa';
+
 export default function Home() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
@@ -12,14 +13,23 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <Navbar/>
-      {isSidebarOpen && (
-        <Sidebar SidebarStatus={isSidebarOpen} />
-      )}
-      <Button onClick={toggleSidebar} className="bg-amber-400">
-        {isSidebarOpen ? 'CLOSE SIDEBAR' : 'OPEN SIDEBAR'}
-      </Button>
+    <div className='flex'>
+      <div className='mt-10'>
+        <Navbar />
+      </div>
+      <div>
+        <div className={`fixed top-20 left-0 h-full transition-transform duration-300 ease-in-out transform ${
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}>
+          <Sidebar SidebarStatus={isSidebarOpen} />
+        </div>
+        <Button 
+          onClick={toggleSidebar} 
+          className="bg-amber-400 fixed top-25 left-5 z-10 p-2 rounded-full"
+        >
+          {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        </Button>
+      </div>
     </div>
   );
 }
