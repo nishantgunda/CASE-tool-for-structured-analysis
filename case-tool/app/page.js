@@ -4,6 +4,7 @@ import { Button } from 'flowbite-react';
 import Sidebar from './components/sidebar.jsx';
 import Navbar from "./components/Navbar";
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { HiOutlineArrowRight } from "react-icons/hi";
 import {
   ReactFlow,
   useNodesState,
@@ -19,8 +20,8 @@ export default function Home() {
     setSidebarOpen(prevState => !prevState);
   };
   const initialNodes = [
-    { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
-    { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
+    { id: '1', position: { x: 300, y: 200 }, data: { label: '1' } },
+    { id: '2', position: { x: 300, y: 300 }, data: { label: '2' } },
   ];
   const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -36,16 +37,20 @@ export default function Home() {
         <Navbar />
       </div>
       <div>
-        <div className={`fixed top-20 left-0 h-full transition-transform duration-300 ease-in-out transform ${
+        <div className={`fixed top-10 left-0 h-full transition-transform duration-300 ease-in-out transform ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}>
           <Sidebar SidebarStatus={isSidebarOpen} />
         </div>
         <Button 
           onClick={toggleSidebar} 
-          className="bg-amber-400 fixed top-25 left-5 z-10 p-2 rounded-full"
+          className={"bg-amber-400 hover:bg-amber-500 fixed z-10 p-2 rounded-full transition-all duration-300 ease-in-out"}
+          style={{
+            top: '50%',
+            left: isSidebarOpen ? '14.8rem' : '-1.2rem',
+          }}
         >
-          {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          {isSidebarOpen ? <FaTimes size={24} /> : <HiOutlineArrowRight size={24} />}
         </Button>
       </div>
       
