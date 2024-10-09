@@ -10,8 +10,24 @@ import {
   useNodesState,
   useEdgesState,
   addEdge,
+  Controls, Panel, NodeOrigin
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';  
+import { shallow } from 'zustand/shallow';
+import useStore, { RFState } from './store';
+
+
+
+const selector = (state) => ({
+  nodes: state.nodes,
+  edges: state.edges,
+  onNodesChange: state.onNodesChange,
+  onEdgesChange: state.onEdgesChange,
+});
+
+const nodeOrigin = [0.5, 0.5];
+
+
 
 export default function Home() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -19,18 +35,14 @@ export default function Home() {
   const toggleSidebar = () => {
     setSidebarOpen(prevState => !prevState);
   };
-  const initialNodes = [
-    { id: '1', position: { x: 300, y: 200 }, data: { label: '1' } },
-    { id: '2', position: { x: 300, y: 300 }, data: { label: '2' } },
-  ];
-  const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
- const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
- 
-  const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
-    [setEdges],
+
+  const { nodes, edges, onNodesChange, onEdgesChange } = useStore(
+    selector,
+    shallow,
   );
+  
+ 
+   
   return (
     <div className='flex'>
       <div className='mt-10'>
@@ -60,8 +72,15 @@ export default function Home() {
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-      />    </div>
+         nodeOrigin={nodeOrigin}
+         fitView
+      >
+
+<Controls showInteractive={false} />
+<Panel position="top">React Flow Mind Map</Panel>
+
+</ReactFlow>
+            </div>
         
     </div>
   );
